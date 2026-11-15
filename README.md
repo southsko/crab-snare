@@ -44,9 +44,9 @@ Rebuild everything: `"C:/Program Files/FreeCAD 1.1/bin/freecadcmd.exe" build.py`
 ## Assembly
 1. **Join tray + deck:** drop the deck onto the tray. The 4 pins locate it, and the notch fits around the tow eye.
 2. **Loops (x6):** these also clamp the two halves together.
-   - One piece of line per loop, about 30 cm of 80 lb mono.
+   - One piece of line per loop: 14" (36 cm) of 100 lb mono leader. 100 lb is the usual line for snare loops.
    - Go up one hole of a post, form a loop about 9-10 cm across, then down the other hole. The line runs through both the deck and the tray.
-   - Crimp the two ends together underneath and pull the crimp up into its recess.
+   - Crimp the two ends together underneath and pull the crimp up into its recess. Use aluminum double-barrel sleeves sized for 100 lb mono (for example AFW 4F8, 1.12 mm bore). If your line will not go in, use the next size up. Crimp with a proper crimping tool, not pliers.
    - 0.065-0.080" trimmer line also fits the holes.
 3. **Side zip ties (x2, one per side, do once):** these sit in the solid wings beside the channel, on raised pads (deck 6.5 mm thick there). Go down one slot, along the V-groove underneath, up the other slot, and cinch it on top of the pad.
 4. **Sinkers:** slide them in from the tail, flat side down, eyes pointing back toward the tail.
