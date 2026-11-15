@@ -29,10 +29,10 @@ Rebuild everything: `"C:/Program Files/FreeCAD 1.1/bin/freecadcmd.exe" build.py`
 - Sinker channel: 44 mm wide x 12.5 mm tall, open at the tail with a 1.5 mm chamfered mouth, about 94 mm long. Flat disc sinkers lie flat, one behind the other.
   - Sized for a 42 mm x 11 mm 3 oz disc plus a 36 mm 2 oz disc.
   - **These are estimates: measure yours** and set `DISC_D`, `DISC2_D`, `DISC_T`, `EYE_L`.
-- Bait cage: 64 mm OD x 56 mm tall, about 74 cm3 of bait space.
+- Bait cage: 65 mm OD x 56 mm tall, about 74 cm3 of bait space.
   - Straight wall for 29 mm, then a 45 deg cone roof with a 6 mm vent at the tip.
   - 12 side vents and 6 roof vents, all teardrop shaped (round bottom, 45 deg pointed top).
-  - Twist-lock with a click detent. The lugs have 45 deg undersides, and the hub has a lead-in chamfer.
+  - Twist-lock, with 0.8 mm clearance all round (cage bore to hub, and lugs in their slots), so it goes on easily even in nylon. The small bump on the hub no longer touches the lugs, so there is no click. The lugs have 45 deg undersides, and the hub has a lead-in chamfer.
 - 6 loop posts (California max), two 2.3 mm holes each, rounded tops, crimp recesses underneath the tray.
   - The middle pair leans 25 deg straight out to the sides.
   - The front and rear pairs lean 35 deg toward the nose and tail corners, so the loops cover all the way round.

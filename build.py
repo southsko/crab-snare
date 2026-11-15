@@ -28,7 +28,7 @@ NOSE_PLANE_X0 = 54.0            # 45 deg nose ramp: z = x - NOSE_PLANE_X0
 
 HUB_R = 29.3                    # bayonet hub on top of the body
 HUB_TOP = BODY_H + 11.0
-CAGE_RO, CAGE_WALL = 32.0, 2.4
+CAGE_RO, CAGE_WALL = 32.5, 2.4   # cage bore 30.1 vs hub 29.3 -> 0.8 mm per side
 CAGE_H = 56.0                   # deck to top of the roof
 APEX_R, APEX_RIM = 3.0, 2.0     # 6 mm top vent, 2 mm flat rim round it
 VENT_W, VENT_N = 5.0, 12        # side vents (teardrop: round bottom, 45 deg pointed top)
@@ -89,8 +89,8 @@ BAY_ANGLES = [12.0, 132.0, 252.0]
 SLOT_RIN = 26.8
 SLOT_ENTRY_SPAN, SLOT_TURN = 15.0, 25.0
 SLOT_Z0, SLOT_Z1 = BODY_H + 2.4, BODY_H + 7.6
-LUG_RIN, LUG_SPAN, LUG_Z0, LUG_Z1 = 27.3, 11.0, BODY_H + 3.0, BODY_H + 7.0   # underside chamfered 45 deg
-DETENT_SPAN, DETENT_RIN = 2.0, 26.6       # bump inner radius (lug inner 27.3 -> 0.7 interference)
+LUG_RIN, LUG_SPAN, LUG_Z0, LUG_Z1 = 27.6, 11.0, BODY_H + 3.2, BODY_H + 6.8   # underside chamfered 45 deg
+DETENT_SPAN, DETENT_RIN = 2.0, 26.6       # bump on the hub, outer edge at 27.3
 
 
 def prism_xz(pts, y0, y1):
@@ -422,7 +422,6 @@ def main():
     for n, sh in (("Tray", tray), ("Deck", deck), ("Cage", cage)):
         o = doc.addObject("Part::Feature", n); o.Shape = sh; objs.append(o)
     doc.recompute()
-    doc.saveAs(os.path.join(OUT, "CrabSnare.FCStd"))
     Part.export(objs, os.path.join(OUT, "CrabSnare.step"))
     stl(tray, os.path.join(OUT, "Tray.stl"))                 # prints as modelled, floor on the bed
     pd = deck.copy()
@@ -431,6 +430,10 @@ def main():
     pc = cage.copy()
     pc.translate(V(0, 0, -pc.BoundBox.ZMin))      # print upright, open end on the bed
     stl(pc, os.path.join(OUT, "Cage.stl"))
+    try:
+        doc.saveAs(os.path.join(OUT, "CrabSnare.FCStd"))
+    except Exception as ex:
+        print("FCStd NOT saved (open in FreeCAD?):", ex)
 
 
 main()
