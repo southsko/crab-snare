@@ -352,7 +352,7 @@ def teardrop_cutter(x0, length, w, z_bot, z_top):
     return c.fuse(d)
 
 
-def build_cage():
+def build_cage(skip_ribs=()):
     """Prints upright (open end down) with no overhangs: 45 deg conical roof up to a small
     top vent, teardrop vents, 45 deg lug undersides."""
     R, w = CAGE_RO, CAGE_WALL
@@ -391,6 +391,8 @@ def build_cage():
     limiter = Part.makeCylinder(R + 2, rib_h - bevel, V(0, 0, z0)).fuse(
         Part.makeCone(R + 1.0, R - 0.2, bevel, V(0, 0, z0 + rib_h - bevel)))
     for i in range(12):
+        if (360.0 / 12 * i + 15) % 360 in skip_ribs:
+            continue
         rib = Part.makeBox(1.2, 3.0, rib_h, V(R - 0.2, -1.5, z0))
         rib.rotate(V(0, 0, 0), V(0, 0, 1), 360.0 / 12 * i + 15)
         cage = cage.fuse(rib.common(limiter))
