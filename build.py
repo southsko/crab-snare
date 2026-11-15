@@ -60,6 +60,7 @@ TAB_SPLIT_X = TUN_X1 + 1.5                     # tow eye forward of this belongs
 NOTCH_CLR = 0.3                                # deck clearance round the tow eye
 PIN_R, PIN_H, PIN_CLR = 2.5, 2.5, 0.2
 PINS = [(20.0, 31.0), (20.0, -31.0), (-20.0, 31.0), (-20.0, -31.0)]
+SIDE_TIES = False                              # side ties dropped: the 6 crimped loops clamp tray + deck
 SIDE_TIE_X = 11.0                              # side ties: one per side in the solid wings beside the channel,
 SIDE_TIE_Y = (38.0, 46.0)                      #   down/up enclosed slots at these |y|, tie runs across the wing
 CAGE_CLEAR_R = 34.5                            # keep deck pads outside the cage + grip ribs
@@ -199,7 +200,7 @@ def build_body():
         pad = Part.makeLoft([prect(BODY_H - 0.5, 0), prect(BODY_H + TAIL_PAD_H, TAIL_PAD_H)], True, True)
         return pad.common(top_area).cut(Part.makeCylinder(CAGE_CLEAR_R, 40, V(0, 0, 0)))
     body = body.fuse(deck_pad(TIE_GATE_X - 8.0, TIE_X + 8.0, -TAIL_PAD_W / 2, TAIL_PAD_W / 2))
-    for sy in (-1, 1):
+    for sy in ((-1, 1) if SIDE_TIES else ()):
         ya, yb = sorted((sy * SIDE_TIE_Y[0], sy * SIDE_TIE_Y[1]))
         body = body.fuse(deck_pad(SIDE_TIE_X - 7.0, SIDE_TIE_X + 7.0, ya - 6.0, yb + 6.0))
 
@@ -276,7 +277,7 @@ def build_body():
         if h.distToShape(tun)[0] < 0.5:
             print("WARNING loop hole breaks into tunnel")
     body = body.cut(tun)
-    for fy in SIDE_TIE_Y:
+    for fy in (SIDE_TIE_Y if SIDE_TIES else ()):
         sl = Part.makeBox(TIE_SLOT[1], TIE_SLOT[0], BODY_H, V(SIDE_TIE_X - TIE_SLOT[1] / 2, fy - TIE_SLOT[0] / 2, 0))
         vg = prism_xz([(SIDE_TIE_X - 4.0, 0), (SIDE_TIE_X + 4.0, 0), (SIDE_TIE_X, 4.0)], fy - 5, fy + 5)
         print("side tie slot y=%.0f: to channel %.1f mm, to crimp pockets %.1f mm (V-groove %.1f mm)" %
@@ -300,7 +301,7 @@ def build_body():
     # side zip ties (one per side, tie once): enclosed slots through deck pad + tray, tie recessed in a
     # groove on the pad and a 45 deg V-groove underneath, both closed at the ends
     fx, pz = SIDE_TIE_X, BODY_H + TAIL_PAD_H
-    for sy in (-1, 1):
+    for sy in ((-1, 1) if SIDE_TIES else ()):
         ya, yb = sy * SIDE_TIE_Y[0], sy * SIDE_TIE_Y[1]
         for yy in (ya, yb):
             body = body.cut(tie_slot(fx, yy, TIE_SLOT[1], TIE_SLOT[0], -0.01, pz, top=True, bottom=True))
